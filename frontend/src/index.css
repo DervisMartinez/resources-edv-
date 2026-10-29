@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Strict font rule: Montserrat exclusively */
+@layer base {
+  *, *::before, *::after, html, body, input, button, select, textarea {
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  body {
+    background-color: #fdfae8;
+    color: #1c1c11;
+    margin: 0;
+    padding: 0;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Custom delicate scrollbars matching corporate fiduciario aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1eedd;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c3c7cc;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #73787c;
+}

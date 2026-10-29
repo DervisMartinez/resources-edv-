@@ -1,0 +1,12 @@
+{
+  "name": "empresas-del-valle-resources",
+  "version": "1.0.0",
+  "description": "Portal Corporativo de Almacenamiento de Recursos para Colaboradores - Empresas Del Valle",
+  "private": true,
+  "scripts": {
+    "start": "node backend/server.js",
+    "backend": "cd backend && node server.js",
+    "frontend": "cd frontend && pnpm run dev",
+    "build": "cd frontend && pnpm run build"
+  }
+}
