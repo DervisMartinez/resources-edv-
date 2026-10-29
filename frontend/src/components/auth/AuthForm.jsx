@@ -8,18 +8,18 @@ import { ArrowRight, Loader2, Building2, ShieldCheck } from 'lucide-react';
  * Botón con estilo sólido de alta visibilidad `#1F2E54` y texto "Acceder"
  */
 export default function AuthForm({ onAuthenticate, divisions = [] }) {
-  // Credenciales oficiales del Super Usuario por defecto
-  const [email, setEmail] = useState('admin@empresasdelvalle.com.ve');
-  const [password, setPassword] = useState('AdminValle2026*');
-  const [division, setDivision] = useState('corp');
+  // Campos vacíos por defecto para seguridad en el acceso
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [division, setDivision] = useState(divisions[0]?.id || 'corp');
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email) {
-      setErrorMsg('Por favor ingrese su correo corporativo.');
+    if (!email || !password) {
+      setErrorMsg('Por favor ingrese su correo y contraseña corporativa.');
       return;
     }
 
@@ -33,7 +33,7 @@ export default function AuthForm({ onAuthenticate, divisions = [] }) {
         division
       });
     } catch (err) {
-      setErrorMsg(err.message || 'Error al autenticar las credenciales fiduciarias.');
+      setErrorMsg(err.message || 'Error al autenticar las credenciales corporativas.');
     } finally {
       setIsLoading(false);
     }
@@ -43,10 +43,6 @@ export default function AuthForm({ onAuthenticate, divisions = [] }) {
     <div className="w-full max-w-[480px] mx-auto py-6 sm:py-8 px-4 sm:px-6 flex flex-col justify-center font-montserrat">
       {/* Encabezado Institucional */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 bg-[#FBFBF5] text-[#40606E] px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider border border-[#CFCDBC] mb-3">
-          <ShieldCheck className="w-4 h-4 text-emerald-600" />
-          <span>Acceso Fiduciario Exclusivo</span>
-        </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-[#092332] tracking-tight">
           Iniciar Sesión
         </h2>
@@ -69,7 +65,7 @@ export default function AuthForm({ onAuthenticate, divisions = [] }) {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="admin@empresasdelvalle.com.ve"
+          placeholder="ejemplo@empresasdelvalle.com.ve"
           required
         />
 
@@ -84,11 +80,22 @@ export default function AuthForm({ onAuthenticate, divisions = [] }) {
               onChange={(e) => setDivision(e.target.value)}
               className="w-full h-12 pl-4 pr-10 bg-[#FBFBF5] hover:bg-white text-[#092332] text-sm font-medium rounded-xl border border-[#CFCDBC] focus:border-[#1F2E54] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20 transition-all cursor-pointer appearance-none"
             >
-              <option value="corp">Corporativo General – Casa Matriz</option>
-              <option value="cerezera">Inversiones Cerezera S.A.</option>
-              <option value="america">Radio América Multimedios</option>
-              <option value="daleo">Daleo Desarrollos Inmobiliarios</option>
-              <option value="advision">Advision Publicidad y Medios</option>
+              {divisions && divisions.length > 0 ? (
+                divisions.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.name || d.short_name}
+                  </option>
+                ))
+              ) : (
+                <>
+                  <option value="corp">Corporativo General – Casa Matriz</option>
+                  <option value="cerezera">Inversiones Cerezera S.A.</option>
+                  <option value="america">Radio América Multimedios</option>
+                  <option value="daleo">Daleo Desarrollos Inmobiliarios</option>
+                  <option value="advision">Advision Publicidad y Medios</option>
+                  <option value="vallealto">Desarrollos Valle Alto</option>
+                </>
+              )}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3.5 pointer-events-none text-[#40606E]">
               <Building2 className="w-4 h-4" />
