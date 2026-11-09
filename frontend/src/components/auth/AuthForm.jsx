@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import InputField from './InputField.jsx';
 import PasswordInputField from './PasswordInputField.jsx';
-import { ArrowRight, Loader2, Building2, ShieldCheck } from 'lucide-react';
+import { Loader2, Building2, Lock } from 'lucide-react';
 
 /**
- * AuthForm - Formulario de Acceso Institucional
- * Botón con estilo sólido de alta visibilidad `#1F2E54` y texto "Acceder"
+ * AuthForm - Formulario de Acceso conforme a macOS Human Interface Guidelines
+ * Simplicidad, precisión, campos limpios y botón estándar macOS
  */
 export default function AuthForm({ onAuthenticate, divisions = [] }) {
-  // Campos vacíos por defecto para seguridad en el acceso
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [division, setDivision] = useState(divisions[0]?.id || 'corp');
@@ -19,7 +18,7 @@ export default function AuthForm({ onAuthenticate, divisions = [] }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      setErrorMsg('Por favor ingrese su correo y contraseña corporativa.');
+      setErrorMsg('Por favor ingrese su correo y contraseña.');
       return;
     }
 
@@ -33,35 +32,35 @@ export default function AuthForm({ onAuthenticate, divisions = [] }) {
         division
       });
     } catch (err) {
-      setErrorMsg(err.message || 'Error al autenticar las credenciales corporativas.');
+      setErrorMsg(err.message || 'Error al verificar las credenciales corporativas.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="w-full max-w-[480px] mx-auto py-6 sm:py-8 px-4 sm:px-6 flex flex-col justify-center font-montserrat">
-      {/* Encabezado Institucional */}
-      <div className="text-center mb-8">
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#092332] tracking-tight">
+    <div className="w-full max-w-[400px] mx-auto py-2 font-montserrat">
+      {/* Encabezado macOS HIG */}
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-[#092332] tracking-tight">
           Iniciar Sesión
         </h2>
-        <p className="text-xs sm:text-sm text-[#40606E] mt-2 font-medium leading-relaxed">
-          Ingrese sus credenciales de Super Administrador o Colaborador para acceder al portal.
+        <p className="text-[13px] text-[#40606E] mt-1 font-medium leading-relaxed">
+          Ingrese sus credenciales de colaborador o administrador para acceder al portal.
         </p>
       </div>
 
       {errorMsg && (
-        <div className="mb-4 p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl font-medium animate-in fade-in">
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-lg font-medium animate-in fade-in">
           {errorMsg}
         </div>
       )}
 
-      {/* Formulario de Login Único */}
+      {/* Formulario macOS */}
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Campo Correo Corporativo */}
         <InputField
-          label="Correo Corporativo Oficial / ID"
+          label="Correo Corporativo Oficial"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -69,16 +68,16 @@ export default function AuthForm({ onAuthenticate, divisions = [] }) {
           required
         />
 
-        {/* Campo División / Unidad de Negocio */}
+        {/* Campo División / Filial */}
         <div className="space-y-1.5">
-          <label className="block text-xs font-bold text-[#092332] tracking-tight">
+          <label className="block text-[12px] font-semibold text-[#092332] tracking-normal">
             División / Unidad de Negocio
           </label>
           <div className="relative">
             <select
               value={division}
               onChange={(e) => setDivision(e.target.value)}
-              className="w-full h-12 pl-4 pr-10 bg-[#FBFBF5] hover:bg-white text-[#092332] text-sm font-medium rounded-xl border border-[#CFCDBC] focus:border-[#1F2E54] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20 transition-all cursor-pointer appearance-none"
+              className="w-full h-10 pl-3.5 pr-9 bg-[#FBFBF5] hover:bg-white text-[#092332] text-[13px] font-medium rounded-lg border border-[#CFCDBC] focus:border-[#1F2E54] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20 transition-all cursor-pointer appearance-none"
             >
               {divisions && divisions.length > 0 ? (
                 divisions.map((d) => (
@@ -97,8 +96,8 @@ export default function AuthForm({ onAuthenticate, divisions = [] }) {
                 </>
               )}
             </select>
-            <div className="absolute inset-y-0 right-0 flex items-center px-3.5 pointer-events-none text-[#40606E]">
-              <Building2 className="w-4 h-4" />
+            <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-[#40606E]">
+              <Building2 className="w-3.5 h-3.5" />
             </div>
           </div>
         </div>
@@ -112,33 +111,28 @@ export default function AuthForm({ onAuthenticate, divisions = [] }) {
           showRequirements={false}
         />
 
-        {/* Botón Principal: Sólido con fondo azul visible #1F2E54 y texto 'Acceder' */}
-        <div className="pt-3">
+        {/* Botón Principal macOS Push Button */}
+        <div className="pt-2">
           <button
             type="submit"
             disabled={isLoading}
-            style={{ backgroundColor: '#1F2E54', color: '#FFFFFF' }}
-            className="w-full h-12 bg-[#1F2E54] hover:bg-[#092332] active:bg-[#000b14] !text-white text-sm font-bold tracking-wide rounded-xl shadow-lg shadow-[#1F2E54]/30 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+            className="w-full h-10 bg-[#1F2E54] hover:bg-[#162241] active:bg-[#0D152A] text-white text-[13px] font-semibold rounded-lg shadow-sm transition-all duration-150 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
           >
             {isLoading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin text-white" />
-                <span className="text-white font-bold">Verificando...</span>
+                <span>Verificando...</span>
               </>
             ) : (
-              <>
-                <span className="text-white font-bold">Acceder</span>
-                <ArrowRight className="w-4 h-4 text-white stroke-[2.5]" />
-              </>
+              <span>Acceder</span>
             )}
           </button>
         </div>
 
-        {/* Nota Institucional de Gobernanza */}
-        <div className="pt-4 mt-2 border-t border-[#CFCDBC]/80 text-center">
-          <p className="text-[11px] text-[#40606E] leading-relaxed font-medium">
-            🔒 El alta y registro de nuevos colaboradores es gestionado de manera exclusiva por la Dirección y Super Administradores mediante protocolos de gobernanza fiduciaria ISO 27001.
-          </p>
+        {/* Nota Institucional de Gobernanza macOS Footnote */}
+        <div className="pt-4 mt-2 border-t border-gray-100 flex items-center justify-center gap-1.5 text-center text-[#73787C] text-[11px]">
+          <Lock className="w-3 h-3 text-[#40606E]" />
+          <span>Acceso corporativo seguro bajo estándares ISO 27001</span>
         </div>
       </form>
     </div>

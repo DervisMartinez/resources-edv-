@@ -1,67 +1,89 @@
 import React from 'react';
 import Logo from '../common/Logo.jsx';
-import AuthStepCard from './AuthStepCard.jsx';
+import { ShieldCheck, BookOpen, Mail, Building2 } from 'lucide-react';
 
 /**
- * AuthHeroBanner - Banner lateral izquierdo fiduciario
- * Con mensajes institucionales de acceso y la paleta ACOMPAÑAMIENTO
+ * AuthHeroBanner - Panel lateral estructurado según macOS HIG
+ * Enfocado en simplicidad, claridad tipográfica y ausencia de efectos recargados
  */
-export default function AuthHeroBanner({ activeStep = 1, onStepChange }) {
-  const steps = [
-    { number: 1, title: 'Acceso Fiduciario Centralizado' },
-    { number: 2, title: 'Validación de Seguridad ISO 27001' },
-    { number: 3, title: 'Bóveda de Recursos y Sistemas' },
+export default function AuthHeroBanner() {
+  const highlights = [
+    {
+      icon: <ShieldCheck className="w-4 h-4 text-emerald-400" />,
+      title: 'Gobernanza Fiduciaria',
+      desc: 'Bóveda centralizada de normativas y documentos con control de versiones.'
+    },
+    {
+      icon: <BookOpen className="w-4 h-4 text-[#CFCDBC]" />,
+      title: 'Academy Corporativa',
+      desc: 'Catálogo de capacitación oficial estructurado por filial y departamento.'
+    },
+    {
+      icon: <Mail className="w-4 h-4 text-blue-300" />,
+      title: 'Herramientas de Trabajo',
+      desc: 'Acceso directo y seguro al servidor de correo institucional asignado.'
+    }
   ];
 
   return (
-    <div className="relative w-full h-full min-h-[620px] lg:min-h-[720px] rounded-[32px] sm:rounded-[36px] overflow-hidden p-8 sm:p-12 flex flex-col justify-between shadow-2xl border border-edv-royal-navy/40 bg-gradient-to-br from-[#1F2E54] via-[#1A3441] to-[#092332]">
-      {/* Resplandor ambiental de fondo usando los tonos Steel y Slate */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#40606E]/30 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute top-1/2 -right-24 w-80 h-80 bg-[#1F2E54]/40 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute -bottom-24 left-1/3 w-96 h-96 bg-[#092332]/60 rounded-full blur-3xl pointer-events-none"></div>
-
-      {/* Header Superior: Logo y Razón Social */}
-      <div className="relative z-10">
-        <Logo
-          className="h-12 w-auto brightness-0 invert drop-shadow"
-          showText={true}
-          textColor="text-white"
-          subtitleColor="text-edv-slate"
-        />
-      </div>
-
-      {/* Contenido Central: Pastilla, Titular y Subtítulo */}
-      <div className="relative z-10 my-auto py-10 max-w-lg">
-        {/* Pastilla Institucional */}
-        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/15 text-white text-xs font-semibold shadow-sm mb-6">
-          <span>Bóveda Fiduciaria Institucional</span>
-          <span role="img" aria-label="empresa">🏢</span>
+    <div className="w-full h-full bg-[#092332] text-white p-8 sm:p-10 flex flex-col justify-between border-r border-[#142C3B] select-none font-montserrat">
+      {/* Cabecera con Logo Oficial */}
+      <div>
+        <div className="flex items-center gap-3 mb-6">
+          <Logo
+            className="h-9 w-auto brightness-0 invert"
+            showText={false}
+          />
+          <div className="flex flex-col">
+            <span className="text-[13px] font-bold text-white tracking-wider uppercase">
+              EMPRESAS DEL VALLE S.A.
+            </span>
+            <span className="text-[10px] text-[#B4BCC8] tracking-widest uppercase">
+              Desde 1958
+            </span>
+          </div>
         </div>
 
-        {/* Titular Principal en Español */}
-        <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-white leading-[1.1] tracking-tight mb-4">
-          Construyendo el Futuro Hoy
-        </h1>
-
-        {/* Subtítulo Descriptivo en Español */}
-        <p className="text-sm sm:text-base text-white/85 font-normal leading-relaxed">
-          Acceso centralizado para la administración fiduciaria, almacenamiento de recursos y gestión de sistemas del consorcio.
-        </p>
+        {/* Titular */}
+        <div className="mt-4">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
+            Plataforma Integral de Recursos Corporativos
+          </h1>
+          <p className="text-[13px] text-[#B4BCC8] mt-2 font-normal leading-relaxed">
+            Consorcio empresarial: Holding Del Valle, Inversiones Cerezera, Radio América, Daleo, Advision y Valle Alto.
+          </p>
+        </div>
       </div>
 
-      {/* Sección Inferior: 3 Tarjetas Pilares Fiduciarios */}
-      <div className="relative z-10 pt-4">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {steps.map((step) => (
-            <AuthStepCard
-              key={step.number}
-              number={step.number}
-              title={step.title}
-              isActive={activeStep === step.number}
-              onClick={() => onStepChange && onStepChange(step.number)}
-            />
-          ))}
-        </div>
+      {/* Lista de características estilo macOS Source List */}
+      <div className="my-8 space-y-4">
+        {highlights.map((item, idx) => (
+          <div
+            key={idx}
+            className="p-3.5 rounded-xl bg-[#0D2535] border border-[#1F3C4D] flex items-start gap-3"
+          >
+            <div className="p-2 rounded-lg bg-[#1A3441] shrink-0 mt-0.5">
+              {item.icon}
+            </div>
+            <div>
+              <h4 className="text-[13px] font-semibold text-white">
+                {item.title}
+              </h4>
+              <p className="text-[11px] text-[#B4BCC8] mt-0.5 leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Pie de página del panel */}
+      <div className="pt-4 border-t border-[#142C3B] flex items-center justify-between text-[11px] text-[#8C9BA5]">
+        <span>Archivo Fiduciario v2.1</span>
+        <span className="inline-flex items-center gap-1">
+          <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+          Conexión TLS 1.3
+        </span>
       </div>
     </div>
   );

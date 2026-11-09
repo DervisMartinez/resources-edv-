@@ -167,51 +167,51 @@ export default function UploadModal({ onClose, onUploadSuccess, currentUser }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto font-montserrat">
-      <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-[#CFCDBC] animate-in fade-in zoom-in-95 my-8">
-        {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-[#CFCDBC]">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#1F2E54] text-white flex items-center justify-center shadow-sm">
-              <Upload className="w-5 h-5 text-white" />
+    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto font-montserrat select-none text-white">
+      <div className="bg-[#092332] rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-[#1F3C4D] animate-in fade-in zoom-in-95 my-8">
+        {/* Header estilo macOS Sheet Titlebar */}
+        <div className="flex items-center justify-between pb-3 border-b border-[#1A3441]">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-[#1F2E54] text-white flex items-center justify-center border border-white/20 shadow-xs">
+              <Upload className="w-4 h-4 text-emerald-400" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-[#092332] leading-tight">
+              <h2 className="text-base font-bold text-white leading-tight">
                 Crear / Subir Recurso o Curso
               </h2>
-              <p className="text-xs text-[#40606E]">
-                Aprovisionamiento fiduciario por Empresa y Departamento
+              <p className="text-[11px] text-[#8C9BA5]">
+                Aprovisionamiento por filial y departamento en MariaDB
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-gray-400 hover:text-black rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+            className="p-1 text-[#8C9BA5] hover:text-white rounded-md hover:bg-white/10 transition-colors cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {errorMsg && (
-          <div className="mt-4 p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          <div className="mt-3 p-3 bg-red-500/20 border border-red-500/40 text-red-300 text-xs rounded-lg flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{errorMsg}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="mt-5 space-y-4 text-xs">
+        <form onSubmit={handleSubmit} className="mt-4 space-y-3.5 text-xs">
           {/* Zona de Arrastrar y Soltar Archivo */}
           <div
             onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
             onDragLeave={() => setIsDragging(false)}
             onDrop={handleDrop}
             onClick={() => fileInputRef.current?.click()}
-            className={`border-2 border-dashed rounded-2xl p-5 text-center cursor-pointer transition-all ${
+            className={`border border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${
               isDragging
-                ? 'border-[#1F2E54] bg-[#FBFBF5]'
+                ? 'border-emerald-400 bg-[#0D2535]'
                 : selectedFile
-                ? 'border-emerald-500 bg-emerald-50/40'
-                : 'border-[#CFCDBC] bg-[#FBFBF5] hover:bg-white'
+                ? 'border-emerald-500/60 bg-emerald-500/10'
+                : 'border-[#1F3C4D] bg-[#0D2535] hover:border-[#40606E]'
             }`}
           >
             <input
@@ -221,23 +221,23 @@ export default function UploadModal({ onClose, onUploadSuccess, currentUser }) {
               className="hidden"
             />
             {selectedFile ? (
-              <div className="flex items-center justify-center gap-3 text-emerald-800 font-semibold">
-                <CheckCircle className="w-5 h-5 text-emerald-600" />
+              <div className="flex items-center justify-center gap-2 text-emerald-300 font-medium">
+                <CheckCircle className="w-4 h-4 text-emerald-400" />
                 <div className="text-left">
-                  <div className="font-bold text-xs">{selectedFile.name}</div>
-                  <div className="text-[10px] text-gray-500">
+                  <div className="font-bold text-xs text-white">{selectedFile.name}</div>
+                  <div className="text-[10px] text-[#8C9BA5]">
                     {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB • Listo para almacenar en MariaDB
                   </div>
                 </div>
               </div>
             ) : (
               <div className="space-y-1">
-                <Upload className="w-6 h-6 text-[#1F2E54] mx-auto" />
-                <div className="font-bold text-[#092332]">
+                <Upload className="w-5 h-5 text-emerald-400 mx-auto" />
+                <div className="font-semibold text-white text-[12px]">
                   Haga clic para seleccionar o arrastre el archivo aquí
                 </div>
-                <div className="text-[10px] text-gray-400">
-                  PDF, DOCX, XLSX, MP4, PPTX (Máx. 50MB) • Se registrará en MariaDB local
+                <div className="text-[10px] text-[#8C9BA5]">
+                  PDF, DOCX, XLSX, MP4, PPTX (Máx. 50MB) • Se guardará en MariaDB
                 </div>
               </div>
             )}
@@ -245,40 +245,40 @@ export default function UploadModal({ onClose, onUploadSuccess, currentUser }) {
 
           {/* Título del Recurso */}
           <div>
-            <label className="block text-xs font-bold text-[#092332] mb-1">
+            <label className="block text-[12px] font-semibold text-white mb-1">
               Título del Recurso o Curso *
             </label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Ej: Manual de Auditoría Fiduciaria ISO 27001 / Guía de Mesa de Dinero"
-              className="w-full px-3.5 py-2.5 bg-[#FBFBF5] text-[#092332] text-xs font-medium rounded-xl border border-[#CFCDBC] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20"
+              placeholder="Ej: Manual de Gobernanza Fiduciaria ISO 27001 / Guía de Mesa de Dinero"
+              className="w-full h-8 px-3 bg-[#0D2535] text-white text-xs font-medium rounded-lg border border-[#1F3C4D] focus:outline-none focus:ring-1 focus:ring-emerald-400/40"
               required
             />
           </div>
 
           {/* Fila: Empresa y Departamento */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-[#092332] mb-1 flex items-center gap-1.5">
-                <Building className="w-3.5 h-3.5 text-[#1F2E54]" />
+              <label className="block text-[12px] font-semibold text-white mb-1 flex items-center gap-1.5">
+                <Building className="w-3.5 h-3.5 text-[#CFCDBC]" />
                 <span>Empresa / Unidad de Negocio *</span>
               </label>
               <select
                 value={division}
                 onChange={(e) => handleDivisionChange(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#FBFBF5] text-[#092332] text-xs font-medium rounded-xl border border-[#CFCDBC] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20 cursor-pointer"
+                className="w-full h-8 px-2.5 bg-[#0D2535] text-white text-xs font-medium rounded-lg border border-[#1F3C4D] focus:outline-none focus:ring-1 focus:ring-emerald-400/40 cursor-pointer"
               >
                 {companyList.map(c => (
-                  <option key={c.id} value={c.id}>{c.shortName || c.name}</option>
+                  <option key={c.id} value={c.id} className="bg-[#092332] text-white">{c.shortName || c.name}</option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#092332] mb-1 flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5 text-[#1F2E54]" />
+              <label className="block text-[12px] font-semibold text-white mb-1 flex items-center gap-1.5">
+                <Layers className="w-3.5 h-3.5 text-[#CFCDBC]" />
                 <span>Departamento Asignado *</span>
               </label>
               <select
@@ -287,10 +287,10 @@ export default function UploadModal({ onClose, onUploadSuccess, currentUser }) {
                   setDepartment(e.target.value);
                   setCustomDepartment('');
                 }}
-                className="w-full px-3.5 py-2.5 bg-[#FBFBF5] text-[#092332] text-xs font-medium rounded-xl border border-[#CFCDBC] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20 cursor-pointer"
+                className="w-full h-8 px-2.5 bg-[#0D2535] text-white text-xs font-medium rounded-lg border border-[#1F3C4D] focus:outline-none focus:ring-1 focus:ring-emerald-400/40 cursor-pointer"
               >
                 {getAvailableDepts().map((deptName, i) => (
-                  <option key={i} value={deptName}>{deptName}</option>
+                  <option key={i} value={deptName} className="bg-[#092332] text-white">{deptName}</option>
                 ))}
               </select>
             </div>
@@ -298,66 +298,66 @@ export default function UploadModal({ onClose, onUploadSuccess, currentUser }) {
 
           {/* Campo para Escribir Departamento Personalizado Desde Cero */}
           <div>
-            <label className="block text-[11px] font-semibold text-[#40606E] mb-1">
-              O ingrese un departamento personalizado desde cero (opcional):
+            <label className="block text-[11px] font-medium text-[#8C9BA5] mb-1">
+              O ingrese un departamento personalizado (opcional):
             </label>
             <input
               type="text"
               value={customDepartment}
               onChange={(e) => setCustomDepartment(e.target.value)}
               placeholder="Ej: Gerencia de Inversiones Agroindustriales / Unidad DOOH Nocturna"
-              className="w-full px-3.5 py-2 bg-[#FBFBF5] text-[#092332] text-xs font-medium rounded-xl border border-[#CFCDBC] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20"
+              className="w-full h-8 px-3 bg-[#0D2535] text-white text-xs font-medium rounded-lg border border-[#1F3C4D] focus:outline-none focus:ring-1 focus:ring-emerald-400/40"
             />
           </div>
 
           {/* Fila: Categoría y Clasificación */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-[#092332] mb-1 flex items-center gap-1.5">
-                <Tag className="w-3.5 h-3.5 text-[#1F2E54]" />
+              <label className="block text-[12px] font-semibold text-white mb-1 flex items-center gap-1.5">
+                <Tag className="w-3.5 h-3.5 text-[#CFCDBC]" />
                 <span>Categoría Temática *</span>
               </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#FBFBF5] text-[#092332] text-xs font-medium rounded-xl border border-[#CFCDBC] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20 cursor-pointer"
+                className="w-full h-8 px-2.5 bg-[#0D2535] text-white text-xs font-medium rounded-lg border border-[#1F3C4D] focus:outline-none focus:ring-1 focus:ring-emerald-400/40 cursor-pointer"
               >
                 {catList.length > 0 ? (
-                  catList.map(c => <option key={c.id} value={c.id}>{c.name}</option>)
+                  catList.map(c => <option key={c.id} value={c.id} className="bg-[#092332] text-white">{c.name}</option>)
                 ) : (
                   <>
-                    <option value="governance">Políticas & Gobernanza</option>
-                    <option value="hr">Talento Humano & Beneficios</option>
-                    <option value="brand">Identidad de Marca & Medios</option>
-                    <option value="templates">Plantillas & Formularios</option>
-                    <option value="tools">Herramientas & Accesos TI</option>
+                    <option value="governance" className="bg-[#092332] text-white">Políticas & Gobernanza</option>
+                    <option value="hr" className="bg-[#092332] text-white">Talento Humano & Beneficios</option>
+                    <option value="brand" className="bg-[#092332] text-white">Identidad de Marca & Medios</option>
+                    <option value="templates" className="bg-[#092332] text-white">Plantillas & Formularios</option>
+                    <option value="tools" className="bg-[#092332] text-white">Herramientas & Accesos TI</option>
                   </>
                 )}
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#092332] mb-1 flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 text-[#1F2E54]" />
+              <label className="block text-[12px] font-semibold text-white mb-1 flex items-center gap-1.5">
+                <Shield className="w-3.5 h-3.5 text-[#CFCDBC]" />
                 <span>Nivel de Confidencialidad *</span>
               </label>
               <select
                 value={confidentiality}
                 onChange={(e) => setConfidentiality(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#FBFBF5] text-[#092332] text-xs font-medium rounded-xl border border-[#CFCDBC] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20 cursor-pointer"
+                className="w-full h-8 px-2.5 bg-[#0D2535] text-white text-xs font-medium rounded-lg border border-[#1F3C4D] focus:outline-none focus:ring-1 focus:ring-emerald-400/40 cursor-pointer"
               >
-                <option value="Público">Público (Todos los colaboradores)</option>
-                <option value="Uso Interno">Uso Interno (Empresas Del Valle)</option>
-                <option value="Confidencial">Confidencial (Requiere autorización)</option>
-                <option value="Restringido">Restringido Fiduciario (Directiva)</option>
+                <option value="Público" className="bg-[#092332] text-white">Público (Todos los colaboradores)</option>
+                <option value="Uso Interno" className="bg-[#092332] text-white">Uso Interno (Empresas Del Valle)</option>
+                <option value="Confidencial" className="bg-[#092332] text-white">Confidencial (Requiere autorización)</option>
+                <option value="Restringido" className="bg-[#092332] text-white">Restringido Fiduciario (Directiva)</option>
               </select>
             </div>
           </div>
 
           {/* Fila: Versión y Autor */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-[#092332] mb-1">
+              <label className="block text-[12px] font-semibold text-white mb-1">
                 Versión
               </label>
               <input
@@ -365,61 +365,60 @@ export default function UploadModal({ onClose, onUploadSuccess, currentUser }) {
                 value={version}
                 onChange={(e) => setVersion(e.target.value)}
                 placeholder="v1.0"
-                className="w-full px-3.5 py-2 bg-[#FBFBF5] text-[#092332] text-xs font-medium rounded-xl border border-[#CFCDBC] focus:bg-white focus:outline-none"
+                className="w-full h-8 px-3 bg-[#0D2535] text-white text-xs font-medium rounded-lg border border-[#1F3C4D] focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#092332] mb-1">
+              <label className="block text-[12px] font-semibold text-white mb-1">
                 Autor o Emisor Responsable
               </label>
               <input
                 type="text"
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
-                className="w-full px-3.5 py-2 bg-[#FBFBF5] text-[#092332] text-xs font-medium rounded-xl border border-[#CFCDBC] focus:bg-white focus:outline-none"
+                className="w-full h-8 px-3 bg-[#0D2535] text-white text-xs font-medium rounded-lg border border-[#1F3C4D] focus:outline-none"
               />
             </div>
           </div>
 
           {/* Descripción */}
           <div>
-            <label className="block text-xs font-bold text-[#092332] mb-1">
+            <label className="block text-[12px] font-semibold text-white mb-1">
               Descripción del Recurso
             </label>
             <textarea
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Indique el propósito, alcance o instrucciones para el colaborador..."
-              className="w-full px-3.5 py-2 bg-[#FBFBF5] text-[#092332] text-xs font-medium rounded-xl border border-[#CFCDBC] focus:bg-white focus:outline-none"
+              placeholder="Indique el propósito o alcance..."
+              className="w-full p-2.5 bg-[#0D2535] text-white text-xs font-medium rounded-lg border border-[#1F3C4D] focus:outline-none"
             />
           </div>
 
-          {/* Botones de Acción */}
-          <div className="pt-3 border-t border-[#CFCDBC] flex items-center justify-end gap-3">
+          {/* Botones de Acción estilo macOS Sheet */}
+          <div className="pt-3 border-t border-[#1A3441] flex items-center justify-end gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2.5 rounded-xl border border-[#CFCDBC] text-xs font-bold text-[#40606E] hover:bg-gray-100 transition-colors cursor-pointer"
+              className="h-8 px-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-[#CFCDBC] hover:text-white transition-colors cursor-pointer"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              style={{ backgroundColor: '#1F2E54', color: '#FFFFFF' }}
-              className="px-5 py-2.5 bg-[#1F2E54] hover:bg-[#092332] !text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+              className="h-8 px-4 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-[#092332] text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin text-white" />
-                  <span>Almacenando en MariaDB...</span>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>Guardando...</span>
                 </>
               ) : (
                 <>
-                  <Upload className="w-4 h-4 text-white" />
-                  <span>Publicar en Repositorio</span>
+                  <Upload className="w-3.5 h-3.5" />
+                  <span>Publicar en MariaDB</span>
                 </>
               )}
             </button>

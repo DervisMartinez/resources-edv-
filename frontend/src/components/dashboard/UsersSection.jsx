@@ -186,135 +186,135 @@ export default function UsersSection({ currentUser }) {
   });
 
   return (
-    <div className="space-y-6 font-montserrat">
-      {/* Encabezado */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#CFCDBC]">
+    <div className="space-y-5 font-montserrat select-none text-white">
+      {/* Encabezado estilo macOS */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#142C3B]">
         <div>
-          <h2 className="text-2xl font-black text-[#092332] tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
             Gestión y Control de Usuarios
           </h2>
-          <p className="text-xs text-[#40606E] mt-0.5">
-            Administración centralizada de cuentas de colaboradores y accesos por empresa y departamento.
+          <p className="text-[12px] text-[#8C9BA5] mt-0.5">
+            Directorio corporativo y control de accesos por filial y departamento en MariaDB.
           </p>
         </div>
 
-        {/* Botón Destacado: Crear Nuevo Usuario */}
+        {/* Botón macOS Push Button: Crear Nuevo Usuario */}
         <button
           onClick={() => setShowCreateModal(true)}
-          style={{ backgroundColor: '#1F2E54', color: '#FFFFFF' }}
-          className="px-5 py-2.5 bg-[#1F2E54] hover:bg-[#092332] !text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer self-start sm:self-auto"
+          className="h-8 px-3.5 bg-emerald-500 hover:bg-emerald-400 text-[#092332] text-xs font-semibold rounded-lg shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer self-start sm:self-auto"
         >
-          <UserPlus className="w-4 h-4 text-white" />
-          <span>Crear Nuevo Usuario</span>
+          <UserPlus className="w-3.5 h-3.5 text-[#092332]" />
+          <span>+ Nuevo Colaborador</span>
         </button>
       </div>
 
       {feedbackMsg.text && (
-        <div className={`p-4 rounded-xl text-xs font-semibold flex items-center gap-2 ${
-          feedbackMsg.type === 'success' ? 'bg-emerald-50 border border-emerald-200 text-emerald-800' : 'bg-red-50 border border-red-200 text-red-800'
+        <div className={`p-3 rounded-lg text-xs font-medium flex items-center gap-2 ${
+          feedbackMsg.type === 'success' ? 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300' : 'bg-red-500/20 border border-red-500/40 text-red-300'
         }`}>
-          {feedbackMsg.type === 'success' ? <CheckCircle className="w-4 h-4 text-emerald-600" /> : <AlertCircle className="w-4 h-4 text-red-600" />}
+          {feedbackMsg.type === 'success' ? <CheckCircle className="w-4 h-4 text-emerald-400" /> : <AlertCircle className="w-4 h-4 text-red-400" />}
           <span>{feedbackMsg.text}</span>
         </div>
       )}
 
-      {/* Barra de Filtros y Búsqueda */}
-      <div className="bg-white p-3.5 rounded-2xl border border-[#CFCDBC] shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
-        {/* Buscador */}
+      {/* Barra de Filtros y Búsqueda estilo macOS Toolbar */}
+      <div className="bg-[#0D2535] p-2.5 sm:p-3 rounded-xl border border-[#1F3C4D] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-2.5">
+        {/* Buscador Inset */}
         <div className="relative flex-grow w-full sm:w-auto">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#73787c]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#8C9BA5]" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Buscar por nombre, correo o departamento..."
-            className="w-full h-10 pl-10 pr-4 bg-[#FBFBF5] text-[#092332] text-xs font-medium rounded-xl border border-[#CFCDBC] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20"
+            placeholder="Buscar colaborador por nombre, correo o departamento..."
+            className="w-full h-8 pl-8 pr-4 bg-[#091E2A] text-white placeholder:text-[#8C9BA5] text-xs font-medium rounded-lg border border-[#1F3C4D] focus:border-[#40606E] focus:outline-none focus:ring-1 focus:ring-[#CFCDBC]/20"
           />
         </div>
 
-        {/* Filtro por Empresa / Unidad de Negocio */}
-        <div className="flex items-center bg-[#FBFBF5] rounded-xl border border-[#CFCDBC] px-3 h-10 w-full sm:w-auto">
-          <Building className="w-3.5 h-3.5 text-[#40606E] mr-2" />
+        {/* Filtro por Empresa */}
+        <div className="flex items-center bg-[#091E2A] rounded-lg border border-[#1F3C4D] px-2.5 h-8 w-full sm:w-auto">
+          <Building className="w-3.5 h-3.5 text-[#8C9BA5] mr-1.5" />
           <select
             value={divisionFilter}
             onChange={(e) => setDivisionFilter(e.target.value)}
-            className="bg-transparent text-xs font-semibold text-[#092332] focus:outline-none cursor-pointer"
+            className="bg-transparent text-[11px] font-semibold text-[#B4BCC8] focus:outline-none cursor-pointer"
           >
-            <option value="all">Todas las Empresas (Holding)</option>
-            <option value="corp">Corporativo General – Casa Matriz</option>
-            <option value="cerezera">Inversiones Cerezera S.A.</option>
-            <option value="america">Radio América Multimedios</option>
-            <option value="daleo">Daleo Desarrollos Inmobiliarios</option>
-            <option value="advision">Advision Publicidad y Medios</option>
+            <option value="all" className="bg-[#091E2A] text-white">Todas las Empresas (Holding)</option>
+            <option value="corp" className="bg-[#091E2A] text-white">Corporativo General – Casa Matriz</option>
+            <option value="cerezera" className="bg-[#091E2A] text-white">Inversiones Cerezera S.A.</option>
+            <option value="america" className="bg-[#091E2A] text-white">Radio América Multimedios</option>
+            <option value="daleo" className="bg-[#091E2A] text-white">Daleo Desarrollos Inmobiliarios</option>
+            <option value="advision" className="bg-[#091E2A] text-white">Advision Publicidad y Medios</option>
+            <option value="vallealto" className="bg-[#091E2A] text-white">Desarrollos Valle Alto</option>
           </select>
         </div>
       </div>
 
-      {/* Tabla de Usuarios Registrados en MariaDB */}
-      <div className="bg-white rounded-2xl border border-[#CFCDBC] shadow-sm overflow-hidden">
+      {/* Tabla de Usuarios Registrados en MariaDB estilo macOS List */}
+      <div className="bg-[#0D2535] rounded-xl border border-[#1F3C4D] shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#FBFBF5] text-[#092332] font-bold uppercase tracking-wider border-b border-[#CFCDBC]">
+            <thead className="bg-[#091E2A] text-[#8C9BA5] font-semibold uppercase tracking-wider border-b border-[#1F3C4D] text-[10px]">
               <tr>
-                <th className="py-3.5 px-4">Colaborador / Correo</th>
-                <th className="py-3.5 px-4">Empresa</th>
-                <th className="py-3.5 px-4">Departamento</th>
-                <th className="py-3.5 px-4">Rol Asignado</th>
-                <th className="py-3.5 px-4">Seguridad</th>
-                <th className="py-3.5 px-4 text-right">Acciones</th>
+                <th className="py-2.5 px-3.5">Colaborador / Correo</th>
+                <th className="py-2.5 px-3.5">Empresa</th>
+                <th className="py-2.5 px-3.5">Departamento</th>
+                <th className="py-2.5 px-3.5">Rol Asignado</th>
+                <th className="py-2.5 px-3.5">Seguridad</th>
+                <th className="py-2.5 px-3.5 text-right">Acciones</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#FBFBF5] text-[#40606E]">
+            <tbody className="divide-y divide-[#1F3C4D]/60 text-white">
               {isLoading ? (
                 <tr>
-                  <td colSpan="6" className="py-8 text-center text-xs text-edv-steel">
-                    <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2 text-[#1F2E54]" />
-                    <span>Cargando usuarios desde la base de datos...</span>
+                  <td colSpan="6" className="py-8 text-center text-xs text-[#8C9BA5]">
+                    <Loader2 className="w-5 h-5 animate-spin mx-auto mb-2 text-emerald-400" />
+                    <span>Consultando directorio fiduciario en MariaDB...</span>
                   </td>
                 </tr>
               ) : filteredUsers.length === 0 ? (
                 <tr>
-                  <td colSpan="6" className="py-8 text-center text-xs text-edv-steel">
-                    No se encontraron usuarios registrados con los criterios seleccionados.
+                  <td colSpan="6" className="py-8 text-center text-xs text-[#8C9BA5]">
+                    No se encontraron colaboradores registrados con los criterios seleccionados.
                   </td>
                 </tr>
               ) : (
                 filteredUsers.map((u) => (
-                  <tr key={u.id} className="hover:bg-[#FBFBF5] transition-colors">
-                    <td className="py-3 px-4">
-                      <div className="font-bold text-[#092332]">{u.name}</div>
-                      <div className="text-[11px] text-[#73787c]">{u.email}</div>
+                  <tr key={u.id} className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3.5">
+                      <div className="font-semibold text-white text-[13px]">{u.name}</div>
+                      <div className="text-[11px] text-[#8C9BA5]">{u.email}</div>
                     </td>
-                    <td className="py-3 px-4 font-semibold text-[#092332]">
+                    <td className="py-2.5 px-3.5 font-semibold text-emerald-400 text-[12px]">
                       {u.divisionName || u.division}
                     </td>
-                    <td className="py-3 px-4 text-[#40606E] font-medium">
+                    <td className="py-2.5 px-3.5 text-[#B4BCC8] font-medium text-[12px]">
                       {u.department || 'Gobernanza General'}
                     </td>
-                    <td className="py-3 px-4">
-                      <span className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                    <td className="py-2.5 px-3.5">
+                      <span className={`inline-block text-[10px] font-bold px-2 py-0.2 rounded-md border ${
                         u.role === 'Super Administrador'
-                          ? 'bg-[#1F2E54] text-white border-[#1F2E54]'
-                          : 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                          ? 'bg-[#1F2E54] text-white border-white/20'
+                          : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
                       }`}>
                         {u.role}
                       </span>
                     </td>
-                    <td className="py-3 px-4 font-mono text-[11px] text-emerald-700">
+                    <td className="py-2.5 px-3.5 font-mono text-[11px] text-emerald-400">
                       ISO 27001
                     </td>
-                    <td className="py-3 px-4 text-right">
+                    <td className="py-2.5 px-3.5 text-right">
                       {u.email !== 'admin@empresasdelvalle.com.ve' ? (
                         <button
                           onClick={() => handleDeleteUser(u.id, u.email)}
-                          className="p-1.5 rounded-lg text-red-500 hover:bg-red-50 hover:text-red-700 transition-colors cursor-pointer"
+                          className="p-1.5 rounded-md text-rose-400 hover:text-white hover:bg-rose-500/20 transition-colors cursor-pointer"
                           title="Revocar acceso"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       ) : (
-                        <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-                          Principal
+                        <span className="text-[10px] font-bold text-amber-300 bg-amber-500/20 px-2 py-0.2 rounded-md border border-amber-500/40">
+                          Super Admin
                         </span>
                       )}
                     </td>
@@ -326,157 +326,125 @@ export default function UsersSection({ currentUser }) {
         </div>
       </div>
 
-      {/* Modal para Crear Nuevo Usuario */}
+      {/* Modal para Crear Nuevo Usuario estilo macOS Sheet Dialog */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-[#CFCDBC] animate-in fade-in zoom-in-95 my-8">
-            <div className="flex items-center justify-between pb-4 border-b border-[#CFCDBC]">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#1F2E54] text-white flex items-center justify-center shadow-sm">
-                  <UserPlus className="w-5 h-5 text-white" />
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-[#092332] text-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-[#1F3C4D] animate-in fade-in zoom-in-95 my-8">
+            <div className="flex items-center justify-between pb-3 border-b border-[#1A3441]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-[#1F2E54] text-white flex items-center justify-center border border-white/20 shadow-xs">
+                  <UserPlus className="w-4 h-4 text-emerald-400" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-[#092332]">Crear Nuevo Usuario</h3>
-                  <p className="text-xs text-[#40606E]">Alta de cuenta autorizada en la base de datos MariaDB</p>
+                  <h3 className="text-base font-bold text-white">Alta de Nuevo Colaborador</h3>
+                  <p className="text-[11px] text-[#8C9BA5]">Registro seguro en MariaDB</p>
                 </div>
               </div>
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="p-1.5 text-gray-400 hover:text-black rounded-lg hover:bg-gray-100 transition-colors"
+                className="p-1 text-[#8C9BA5] hover:text-white rounded-md hover:bg-white/10 transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
 
-            <form onSubmit={handleCreateUser} className="mt-5 space-y-4 text-xs">
+            <form onSubmit={handleCreateUser} className="mt-4 space-y-3.5 text-xs">
               <div className="space-y-1">
-                <label className="font-bold text-[#092332] block">Nombre Completo *</label>
+                <label className="font-semibold text-white text-[12px] block">Nombre Completo *</label>
                 <input
                   type="text"
                   required
                   value={newFullName}
                   onChange={(e) => setNewFullName(e.target.value)}
-                  placeholder="Ej. Roberto Gómez Cerezera"
-                  className="w-full h-10 px-3.5 bg-[#FBFBF5] text-[#092332] rounded-xl border border-[#CFCDBC] font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20"
+                  placeholder="Ej. Carlos Mendoza"
+                  className="w-full h-8 px-3 bg-[#0D2535] text-white rounded-lg border border-[#1F3C4D] font-medium focus:outline-none focus:ring-1 focus:ring-emerald-400/40"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <label className="font-bold text-[#092332] block">Correo Corporativo *</label>
+                  <label className="font-semibold text-white text-[12px] block">Correo Corporativo *</label>
                   <input
                     type="email"
                     required
                     value={newEmail}
                     onChange={(e) => setNewEmail(e.target.value)}
                     placeholder="usuario@empresasdelvalle.com.ve"
-                    className="w-full h-10 px-3.5 bg-[#FBFBF5] text-[#092332] rounded-xl border border-[#CFCDBC] font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20"
+                    className="w-full h-8 px-3 bg-[#0D2535] text-white rounded-lg border border-[#1F3C4D] font-medium focus:outline-none focus:ring-1 focus:ring-emerald-400/40"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-[#092332] block">Contraseña Inicial *</label>
+                  <label className="font-semibold text-white text-[12px] block">Contraseña Inicial *</label>
                   <input
                     type="text"
                     required
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full h-10 px-3.5 bg-[#FBFBF5] text-[#092332] rounded-xl border border-[#CFCDBC] font-mono font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20"
+                    className="w-full h-8 px-3 bg-[#0D2535] text-white rounded-lg border border-[#1F3C4D] font-medium font-mono focus:outline-none focus:ring-1 focus:ring-emerald-400/40"
                   />
                 </div>
               </div>
 
-              {/* Selección de Empresa y Departamento */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <label className="font-bold text-[#092332] block">Empresa / Unidad de Negocio *</label>
+                  <label className="font-semibold text-white text-[12px] block">Filial / Empresa *</label>
                   <select
                     value={newDivision}
                     onChange={(e) => handleDivisionChange(e.target.value)}
-                    className="w-full h-10 px-3 bg-[#FBFBF5] text-[#092332] rounded-xl border border-[#CFCDBC] font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20 cursor-pointer"
+                    className="w-full h-8 px-2.5 bg-[#0D2535] text-white rounded-lg border border-[#1F3C4D] font-medium focus:outline-none focus:ring-1 focus:ring-emerald-400/40 cursor-pointer"
                   >
-                    <option value="corp">Corporativo General – Casa Matriz</option>
-                    <option value="cerezera">Inversiones Cerezera S.A.</option>
-                    <option value="america">Radio América Multimedios</option>
-                    <option value="daleo">Daleo Desarrollos Inmobiliarios</option>
-                    <option value="advision">Advision Publicidad y Medios</option>
+                    <option value="corp">Holding Del Valle (Casa Matriz)</option>
+                    <option value="cerezera">Inversiones Cerezera</option>
+                    <option value="america">Radio América 95.5 FM</option>
+                    <option value="daleo">Daleo Construcciones</option>
+                    <option value="advision">Advision DOOH</option>
+                    <option value="vallealto">Desarrollos Valle Alto</option>
                   </select>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-[#092332] block">Departamento Sugerido *</label>
-                  <select
-                    value={newDepartment}
-                    onChange={(e) => {
-                      setNewDepartment(e.target.value);
-                      setCustomDepartment('');
-                    }}
-                    className="w-full h-10 px-3 bg-[#FBFBF5] text-[#092332] rounded-xl border border-[#CFCDBC] font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20 cursor-pointer"
-                  >
-                    {(corporateDepartments[newDivision] || []).map((dept, i) => (
-                      <option key={i} value={dept}>{dept}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* Opción de Departamento Personalizado desde cero */}
-              <div className="space-y-1">
-                <label className="font-semibold text-[#40606E] block text-[11px]">
-                  O ingrese un departamento personalizado desde cero (opcional):
-                </label>
-                <input
-                  type="text"
-                  value={customDepartment}
-                  onChange={(e) => setCustomDepartment(e.target.value)}
-                  placeholder="Ej. Auditoría Forense y Riesgos Especiales"
-                  className="w-full h-9 px-3 bg-[#FBFBF5] text-[#092332] rounded-lg border border-[#CFCDBC] text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <label className="font-bold text-[#092332] block">Rol de Acceso *</label>
+                  <label className="font-semibold text-white text-[12px] block">Rol Asignado *</label>
                   <select
                     value={newRole}
                     onChange={(e) => setNewRole(e.target.value)}
-                    className="w-full h-10 px-3 bg-[#FBFBF5] text-[#092332] rounded-xl border border-[#CFCDBC] font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20 cursor-pointer"
+                    className="w-full h-8 px-2.5 bg-[#0D2535] text-white rounded-lg border border-[#1F3C4D] font-medium focus:outline-none focus:ring-1 focus:ring-emerald-400/40 cursor-pointer"
                   >
-                    <option value="Colaborador Fiduciario">Colaborador Fiduciario (Estándar)</option>
-                    <option value="Administrador de División">Administrador de División</option>
-                    <option value="Auditor de Cumplimiento">Auditor de Cumplimiento ISO</option>
+                    <option value="Colaborador Fiduciario">Colaborador Fiduciario</option>
                     <option value="Super Administrador">Super Administrador</option>
                   </select>
                 </div>
-
-                <div className="space-y-1">
-                  <label className="font-bold text-[#092332] block">Teléfono / Extensión</label>
-                  <input
-                    type="text"
-                    value={newPhone}
-                    onChange={(e) => setNewPhone(e.target.value)}
-                    placeholder="+58 (241) 850-8255"
-                    className="w-full h-10 px-3.5 bg-[#FBFBF5] text-[#092332] rounded-xl border border-[#CFCDBC] font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20"
-                  />
-                </div>
               </div>
 
-              <div className="pt-4 border-t border-[#CFCDBC] flex items-center justify-end gap-3">
+              <div className="space-y-1">
+                <label className="font-semibold text-white text-[12px] block">Departamento Oficial *</label>
+                <select
+                  value={newDepartment}
+                  onChange={(e) => setNewDepartment(e.target.value)}
+                  className="w-full h-8 px-2.5 bg-[#0D2535] text-white rounded-lg border border-[#1F3C4D] font-medium focus:outline-none focus:ring-1 focus:ring-emerald-400/40 cursor-pointer"
+                >
+                  {(corporateDepartments[newDivision] || []).map((dept, idx) => (
+                    <option key={idx} value={dept}>{dept}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Botones de acción macOS Sheet (Cancel a la izquierda, Confirm a la derecha) */}
+              <div className="pt-3 border-t border-[#1A3441] flex items-center justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  className="px-4 py-2 rounded-xl border border-[#CFCDBC] text-[#40606E] hover:bg-gray-100 font-bold uppercase tracking-wider"
+                  className="h-8 px-3 rounded-lg bg-white/5 hover:bg-white/10 text-[#CFCDBC] text-xs font-medium border border-white/10 transition-colors cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  style={{ backgroundColor: '#1F2E54', color: '#FFFFFF' }}
-                  className="px-5 py-2.5 bg-[#1F2E54] hover:bg-[#092332] !text-white font-bold uppercase tracking-wider rounded-xl shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-70"
+                  className="h-8 px-4 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-[#092332] text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5"
                 >
-                  {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin text-white" /> : <UserPlus className="w-4 h-4 text-white" />}
-                  <span>Registrar en MariaDB</span>
+                  {isSubmitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+                  <span>Guardar en MariaDB</span>
                 </button>
               </div>
             </form>

@@ -5,12 +5,12 @@
 /* Strict font rule: Montserrat exclusively */
 @layer base {
   *, *::before, *::after, html, body, input, button, select, textarea {
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
   }
 
   body {
-    background-color: #fdfae8;
-    color: #1c1c11;
+    background-color: #08161E;
+    color: #F8FAFC;
     margin: 0;
     padding: 0;
     overscroll-behavior: none;
@@ -19,21 +19,24 @@
   }
 }
 
-/* Custom delicate scrollbars matching corporate fiduciario aesthetic */
+/* macOS refined thin scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1eedd;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c3c7cc;
-  border-radius: 3px;
+  background: rgba(180, 188, 200, 0.25);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #73787c;
+  background: rgba(180, 188, 200, 0.45);
+  border-radius: 9999px;
 }

@@ -35,25 +35,25 @@ export default function DivisionFilter({
     : allItems.filter(item => item.id === userDivision || item.id === 'all');
 
   return (
-    <div className="w-full my-6 font-montserrat">
-      <div className="flex items-center justify-between mb-3">
-        <h2 className="text-xs font-bold text-[#43474c] uppercase tracking-widest flex items-center gap-2">
-          <span>{isSuperAdmin ? 'Unidades de Negocio del Consorcio' : 'Tu Filial Corporativa Asignada'}</span>
-          <span className="text-[10px] text-[#73787c] font-medium lowercase">
+    <div className="w-full my-5 font-montserrat select-none">
+      <div className="flex items-center justify-between mb-2.5">
+        <h2 className="text-[11px] font-semibold text-[#8C9BA5] uppercase tracking-wider flex items-center gap-2">
+          <span>{isSuperAdmin ? 'Filiales del Consorcio' : 'Tu Filial Corporativa Asignada'}</span>
+          <span className="text-[10px] text-[#8C9BA5]/80 font-normal lowercase">
             {isSuperAdmin ? '(filtrar recursos por empresa)' : '(recursos autorizados para tu empresa)'}
           </span>
         </h2>
         {isSuperAdmin && activeDivision !== 'all' && (
           <button
             onClick={() => onSelectDivision('all')}
-            className="text-[11px] font-bold text-[#3A5A78] hover:text-[#092332] underline-offset-2 hover:underline cursor-pointer"
+            className="text-[11px] font-semibold text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer"
           >
             Ver Todas las Divisiones
           </button>
         )}
       </div>
 
-      <div className={`grid gap-3 ${isSuperAdmin ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6' : 'grid-cols-1 sm:grid-cols-2 max-w-xl'}`}>
+      <div className={`grid gap-2.5 ${isSuperAdmin ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6' : 'grid-cols-1 sm:grid-cols-2 max-w-xl'}`}>
         {displayItems.map((item) => {
           const isSelected = activeDivision === item.id;
           const logoSrc = companyLogos[item.id] || item.logoPath || '/logo-holding.png';
@@ -62,14 +62,14 @@ export default function DivisionFilter({
             <button
               key={item.id}
               onClick={() => onSelectDivision(item.id)}
-              className={`p-3 rounded-xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between relative overflow-hidden group ${
+              className={`p-2.5 rounded-xl border text-left transition-all duration-150 cursor-pointer flex flex-col justify-between relative overflow-hidden group shadow-xs ${
                 isSelected
-                  ? 'bg-[#092332] text-white border-[#092332] shadow-md ring-2 ring-[#3A5A78]'
-                  : 'bg-white hover:bg-[#f7f4e2] text-[#1c1c11] border-[#c3c7cc] shadow-sm'
+                  ? 'bg-[#1F2E54] text-white border-white/20 shadow-xs'
+                  : 'bg-[#0D2535] hover:bg-[#112F42] text-[#B4BCC8] hover:text-white border-[#1F3C4D]'
               }`}
             >
               <div className="flex items-center justify-between w-full mb-2">
-                <div className="w-10 h-10 rounded-lg p-1.5 flex items-center justify-center bg-white shadow-xs border border-gray-100 shrink-0">
+                <div className="w-8 h-8 rounded-lg p-1 flex items-center justify-center bg-white shadow-xs border border-gray-100 shrink-0">
                   <img
                     src={logoSrc}
                     alt={item.shortName || item.name}
@@ -78,8 +78,8 @@ export default function DivisionFilter({
                 </div>
                 {item.resourceCount !== undefined && (
                   <span
-                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                      isSelected ? 'bg-white/20 text-[#dae2ff]' : 'bg-gray-100 text-[#43474c]'
+                    className={`text-[9px] font-bold px-1.5 py-0.2 rounded-md ${
+                      isSelected ? 'bg-white/20 text-white' : 'bg-[#091E2A] text-[#8C9BA5]'
                     }`}
                   >
                     {item.resourceCount} {item.resourceCount === 1 ? 'doc' : 'docs'}
@@ -88,12 +88,12 @@ export default function DivisionFilter({
               </div>
 
               <div>
-                <h3 className="font-bold text-xs uppercase tracking-tight leading-snug">
+                <h3 className="font-bold text-[12px] uppercase tracking-tight leading-snug truncate">
                   {item.shortName || item.name}
                 </h3>
                 <p
                   className={`text-[10px] line-clamp-1 mt-0.5 ${
-                    isSelected ? 'text-[#b1cadd]' : 'text-[#73787c]'
+                    isSelected ? 'text-[#dae2ff]' : 'text-[#8C9BA5]'
                   }`}
                 >
                   {item.description}
@@ -101,7 +101,7 @@ export default function DivisionFilter({
               </div>
 
               {isSelected && (
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#3A5A78]"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-400"></div>
               )}
             </button>
           );

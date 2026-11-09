@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 
 /**
- * PasswordInputField - Campo de contraseña con alternador de visibilidad y requisitos
- * Con textos y advertencias en español
+ * PasswordInputField - macOS HIG compliant password field
+ * Clean, compact, clear affordance
  */
 export default function PasswordInputField({
   value,
@@ -11,13 +11,13 @@ export default function PasswordInputField({
   label = 'Contraseña',
   placeholder = '••••••••••••••••',
   error = null,
-  showRequirements = true
+  showRequirements = false
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-bold text-edv-midnight tracking-tight">
+      <label className="block text-[12px] font-semibold text-[#092332] tracking-normal">
         {label}
       </label>
 
@@ -28,12 +28,12 @@ export default function PasswordInputField({
           onChange={onChange}
           placeholder={placeholder}
           required
-          className="w-full h-12 pl-4 pr-12 bg-edv-surface hover:bg-white text-edv-midnight placeholder:text-edv-slate text-sm font-medium rounded-xl border border-edv-sand/70 focus:border-edv-royal-navy focus:bg-white focus:outline-none focus:ring-2 focus:ring-edv-royal-navy/20 transition-all duration-200"
+          className="w-full h-10 pl-3.5 pr-10 bg-[#FBFBF5] hover:bg-white text-[#092332] placeholder:text-[#8C9BA5] text-[13px] font-medium rounded-lg border border-[#CFCDBC] focus:border-[#1F2E54] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1F2E54]/20 transition-all duration-150"
         />
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3.5 p-1 text-edv-slate hover:text-edv-midnight transition-colors cursor-pointer"
+          className="absolute right-3 p-1 text-[#8C9BA5] hover:text-[#092332] transition-colors cursor-pointer"
           aria-label="Alternar visibilidad de contraseña"
         >
           {showPassword ? (
@@ -45,8 +45,8 @@ export default function PasswordInputField({
       </div>
 
       {showRequirements && (
-        <p className="text-[10px] sm:text-[11px] text-edv-steel leading-relaxed pt-0.5">
-          Al menos 12 caracteres, máximo 20 caracteres. Letras mayúsculas, minúsculas, números y símbolos.
+        <p className="text-[11px] text-[#40606E] leading-relaxed pt-0.5">
+          Al menos 12 caracteres, mayúsculas, minúsculas, números y símbolos.
         </p>
       )}
 

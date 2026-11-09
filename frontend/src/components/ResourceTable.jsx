@@ -45,96 +45,95 @@ export default function ResourceTable({
   const getConfidentialityBadge = (level) => {
     switch (level) {
       case 'Restringido Fiduciario':
-        return 'bg-red-50 text-red-700 border-red-200';
+        return 'bg-red-500/20 text-red-300 border-red-500/40';
       case 'Confidencial':
-        return 'bg-amber-50 text-amber-700 border-amber-200';
+        return 'bg-amber-500/20 text-amber-300 border-amber-500/40';
       case 'Uso Interno':
-        return 'bg-blue-50 text-blue-700 border-blue-200';
+        return 'bg-blue-500/20 text-blue-300 border-blue-500/40';
       case 'Público':
-        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
       default:
-        return 'bg-gray-50 text-gray-700 border-gray-200';
+        return 'bg-white/10 text-white/80 border-white/20';
     }
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-[#CFCDBC] shadow-sm overflow-hidden mb-8 font-montserrat">
+    <div className="bg-[#0D2535] rounded-xl border border-[#1F3C4D] shadow-xs overflow-hidden mb-8 font-montserrat select-none">
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs">
-          <thead className="bg-[#FBFBF5] text-[#092332] font-bold uppercase tracking-wider border-b border-[#CFCDBC]">
+          <thead className="bg-[#091E2A] text-[#8C9BA5] font-semibold uppercase tracking-wider border-b border-[#1F3C4D] text-[10px]">
             <tr>
-              <th className="py-3.5 px-4 w-10 text-center">★</th>
-              <th className="py-3.5 px-4">Documento / Título</th>
-              <th className="py-3.5 px-4">Empresa</th>
-              <th className="py-3.5 px-4">Departamento</th>
-              <th className="py-3.5 px-4">Clasificación</th>
-              <th className="py-3.5 px-4">Versión</th>
-              <th className="py-3.5 px-4">Tamaño</th>
-              <th className="py-3.5 px-4 text-right">Acciones</th>
+              <th className="py-2.5 px-3.5 w-8 text-center">★</th>
+              <th className="py-2.5 px-3.5">Documento / Título</th>
+              <th className="py-2.5 px-3.5">Empresa</th>
+              <th className="py-2.5 px-3.5">Departamento</th>
+              <th className="py-2.5 px-3.5">Clasificación</th>
+              <th className="py-2.5 px-3.5">Versión</th>
+              <th className="py-2.5 px-3.5">Tamaño</th>
+              <th className="py-2.5 px-3.5 text-right">Acciones</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#FBFBF5] text-[#40606E]">
+          <tbody className="divide-y divide-[#1F3C4D]/60 text-white">
             {resources.map((res) => (
-              <tr key={res.id} className="hover:bg-[#FBFBF5] transition-colors">
-                <td className="py-3 px-4 text-center">
+              <tr key={res.id} className="hover:bg-white/5 transition-colors">
+                <td className="py-2.5 px-3.5 text-center">
                   <button
                     onClick={() => onToggleFavorite(res.id)}
-                    className="text-gray-300 hover:text-amber-500 cursor-pointer"
+                    className="text-[#8C9BA5] hover:text-amber-400 cursor-pointer"
                   >
                     <Star
                       className={`w-3.5 h-3.5 ${
-                        res.isFavorite ? 'fill-amber-500 text-amber-500' : ''
+                        res.isFavorite ? 'fill-amber-400 text-amber-400' : ''
                       }`}
                     />
                   </button>
                 </td>
-                <td className="py-3 px-4">
+                <td className="py-2.5 px-3.5">
                   <div className="flex items-center gap-2.5">
-                    <div className="p-1.5 bg-[#FBFBF5] rounded-lg border border-[#CFCDBC]">
+                    <div className="p-1.5 bg-[#091E2A] rounded-lg border border-[#1F3C4D] shrink-0">
                       {getFileTypeIcon(res.fileType)}
                     </div>
                     <div>
                       <span
                         onClick={() => onViewDetails(res)}
-                        className="font-bold text-[#092332] hover:text-[#1F2E54] cursor-pointer line-clamp-1"
+                        className="font-semibold text-white hover:text-emerald-400 cursor-pointer line-clamp-1 text-[13px]"
                       >
                         {res.title}
                       </span>
-                      <span className="text-[11px] text-[#73787c] line-clamp-1">
+                      <span className="text-[11px] text-[#8C9BA5] line-clamp-1">
                         {res.author}
                       </span>
                     </div>
                   </div>
                 </td>
-                <td className="py-3 px-4 font-semibold text-[#092332]">
+                <td className="py-2.5 px-3.5 font-semibold text-emerald-400 text-[12px]">
                   {getDivisionName(res.division)}
                 </td>
-                <td className="py-3 px-4 font-medium text-[#40606E]">
+                <td className="py-2.5 px-3.5 font-medium text-[#B4BCC8] text-[12px]">
                   {res.department || 'Gobernanza General'}
                 </td>
-                <td className="py-3 px-4">
-                  <span className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded-full border ${getConfidentialityBadge(res.confidentiality)}`}>
+                <td className="py-2.5 px-3.5">
+                  <span className={`inline-block text-[10px] font-bold px-2 py-0.2 rounded-md border ${getConfidentialityBadge(res.confidentiality)}`}>
                     {res.confidentiality}
                   </span>
                 </td>
-                <td className="py-3 px-4 font-mono font-medium">{res.version}</td>
-                <td className="py-3 px-4 text-[#73787c]">{res.fileSize}</td>
-                <td className="py-3 px-4 text-right">
+                <td className="py-2.5 px-3.5 font-mono text-[11px] text-[#8C9BA5]">{res.version}</td>
+                <td className="py-2.5 px-3.5 text-[#8C9BA5] text-[11px]">{res.fileSize}</td>
+                <td className="py-2.5 px-3.5 text-right">
                   <div className="flex items-center justify-end gap-1.5">
                     <button
                       onClick={() => onViewDetails(res)}
-                      className="p-1.5 rounded-lg text-[#1F2E54] hover:bg-[#FBFBF5] transition-colors cursor-pointer"
+                      className="p-1.5 rounded-md text-[#CFCDBC] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                       title="Ver detalles"
                     >
-                      <Eye className="w-4 h-4" />
+                      <Eye className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => onDownload(res)}
-                      style={{ backgroundColor: '#1F2E54', color: '#FFFFFF' }}
-                      className="p-1.5 rounded-lg bg-[#1F2E54] hover:bg-[#092332] !text-white transition-colors cursor-pointer shadow-xs"
+                      className="p-1.5 rounded-md bg-[#1F2E54] hover:bg-[#253966] text-white transition-colors cursor-pointer shadow-xs border border-white/10"
                       title="Descargar recurso"
                     >
-                      <Download className="w-4 h-4 text-white" />
+                      <Download className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 </td>

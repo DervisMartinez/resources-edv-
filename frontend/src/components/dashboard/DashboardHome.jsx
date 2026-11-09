@@ -81,53 +81,53 @@ export default function DashboardHome({
     <div className="space-y-8 select-none font-montserrat text-white">
       {/* 1. SECCIÓN EXCLUSIVA DE SUPER ADMINISTRADOR */}
       {isSuperAdmin && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#0D2535] via-[#1A3441] to-[#0D2535] border border-[#1F3C4D] shadow-xl">
+        <div className="p-4 sm:p-5 rounded-xl bg-[#0D2535] border border-[#1F3C4D] shadow-xs">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#1F2E54] border border-[#CFCDBC]/40 flex items-center justify-center text-amber-300 shadow-md">
-                <ShieldCheck className="w-6 h-6" />
+              <div className="w-9 h-9 rounded-lg bg-[#1F2E54] border border-[#CFCDBC]/30 flex items-center justify-center text-amber-300 shadow-xs">
+                <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-black tracking-wider text-amber-300 uppercase">
+                  <span className="text-[11px] font-bold tracking-wider text-amber-300 uppercase">
                     Panel Maestro Super Administrador
                   </span>
-                  <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full font-bold">
-                    MariaDB Local 10.4 Conectada
+                  <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-md font-bold">
+                    MariaDB Conectada
                   </span>
                 </div>
-                <h3 className="text-sm font-bold text-white mt-0.5">
+                <h3 className="text-[13px] font-bold text-white mt-0.5">
                   Gobernanza Centralizada de Empresas Del Valle S.A.
                 </h3>
               </div>
             </div>
 
-            {/* Acciones del Super Administrador */}
-            <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+            {/* Acciones del Super Administrador estilo macOS Toolbar Controls */}
+            <div className="flex items-center gap-2 flex-wrap">
               {/* Botón Crear Recurso / Curso desde Cero */}
               <button
                 onClick={onOpenUpload}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-[#092332] text-xs font-black shadow-md shadow-emerald-500/20 transition-all cursor-pointer"
+                className="flex items-center gap-1.5 h-8 px-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-[#092332] text-xs font-bold shadow-xs transition-colors cursor-pointer"
                 title="Crear recurso o curso por departamento desde cero"
               >
-                <PlusCircle className="w-4 h-4" />
-                <span>+ Crear / Subir Recurso</span>
+                <PlusCircle className="w-3.5 h-3.5" />
+                <span>+ Crear Recurso</span>
               </button>
 
               {/* Botón Gestionar Usuarios */}
               <button
                 onClick={onNavigateToUsers}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#1F2E54] hover:bg-[#253966] text-white border border-[#40606E] text-xs font-bold shadow-md transition-all cursor-pointer"
+                className="flex items-center gap-1.5 h-8 px-3 rounded-lg bg-[#1F2E54] hover:bg-[#253966] text-white border border-[#40606E]/60 text-xs font-semibold shadow-xs transition-colors cursor-pointer"
                 title="Crear y administrar usuarios en MariaDB"
               >
-                <Users className="w-4 h-4 text-amber-300" />
-                <span>Gestionar Usuarios</span>
+                <Users className="w-3.5 h-3.5 text-amber-300" />
+                <span>Usuarios</span>
               </button>
 
               {/* Botón Auditoría */}
               <button
                 onClick={onOpenAudit}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-[#CFCDBC] text-xs font-semibold border border-white/10 transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#CFCDBC] text-xs font-medium border border-white/10 transition-colors cursor-pointer"
               >
                 <FileText className="w-3.5 h-3.5" />
                 <span>Auditoría</span>
@@ -136,53 +136,63 @@ export default function DashboardHome({
               {/* Botón Gestionar Estructura */}
               <button
                 onClick={onOpenStructure}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#1F2E54] hover:bg-[#253966] text-white border border-[#40606E] text-xs font-bold transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#CFCDBC] text-xs font-medium border border-white/10 transition-colors cursor-pointer"
                 title="Editar nombres de empresas, departamentos y categorías"
               >
                 <FolderTree className="w-3.5 h-3.5 text-amber-300" />
-                <span>Estructura & Deptos</span>
+                <span>Estructura</span>
               </button>
 
-              {/* Conmutador Vista Admin / Colaborador */}
-              <button
-                onClick={() => setIsAdminPreviewMode(!isAdminPreviewMode)}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
-                  isAdminPreviewMode
-                    ? 'bg-amber-500 text-[#092332] border-amber-400'
-                    : 'bg-[#061219] text-[#B4BCC8] border-[#1F3C4D] hover:text-white'
-                }`}
-                title="Cambiar perspectiva para ver el portal como un colaborador normal"
-              >
-                <Eye className="w-3.5 h-3.5" />
-                <span>{isAdminPreviewMode ? 'Vista: Colaborador' : 'Vista: Admin'}</span>
-              </button>
+              {/* macOS Segmented Control: Vista Admin / Colaborador */}
+              <div className="flex items-center p-0.5 bg-[#061219] rounded-lg border border-[#1F3C4D] h-8">
+                <button
+                  onClick={() => setIsAdminPreviewMode(false)}
+                  className={`h-7 px-2.5 rounded-md text-[11px] font-semibold transition-all cursor-pointer ${
+                    !isAdminPreviewMode
+                      ? 'bg-[#1F2E54] text-white shadow-xs border border-white/10'
+                      : 'text-[#8C9BA5] hover:text-white'
+                  }`}
+                >
+                  Admin
+                </button>
+                <button
+                  onClick={() => setIsAdminPreviewMode(true)}
+                  className={`h-7 px-2.5 rounded-md text-[11px] font-semibold transition-all cursor-pointer ${
+                    isAdminPreviewMode
+                      ? 'bg-amber-500 text-[#092332] shadow-xs'
+                      : 'text-[#8C9BA5] hover:text-white'
+                  }`}
+                >
+                  Colaborador
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Métricas reales de la base de datos MariaDB */}
+          {/* Métricas reales de MariaDB estilo macOS Inspector */}
           {!isAdminPreviewMode && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 pt-4 border-t border-white/10">
-              <div className="bg-[#092332] p-2.5 rounded-xl border border-[#1F3C4D]">
-                <div className="text-[10px] font-bold text-[#8C9BA5] uppercase">Colaboradores en DB</div>
-                <div className="text-lg font-black text-white mt-0.5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-3.5 pt-3.5 border-t border-white/10">
+              <div className="bg-[#091E2A] p-2.5 rounded-lg border border-[#1F3C4D]">
+                <div className="text-[10px] font-semibold text-[#8C9BA5] uppercase">Colaboradores en DB</div>
+                <div className="text-base font-bold text-white mt-0.5">
                   {stats?.totalUsers || 1} Activo(s)
                 </div>
               </div>
-              <div className="bg-[#092332] p-2.5 rounded-xl border border-[#1F3C4D]">
-                <div className="text-[10px] font-bold text-[#8C9BA5] uppercase">Recursos Creados</div>
-                <div className="text-lg font-black text-emerald-400 mt-0.5">
+              <div className="bg-[#091E2A] p-2.5 rounded-lg border border-[#1F3C4D]">
+                <div className="text-[10px] font-semibold text-[#8C9BA5] uppercase">Recursos Creados</div>
+                <div className="text-base font-bold text-emerald-400 mt-0.5">
                   {resources.length} Real(es)
                 </div>
               </div>
-              <div className="bg-[#092332] p-2.5 rounded-xl border border-[#1F3C4D]">
-                <div className="text-[10px] font-bold text-[#8C9BA5] uppercase">Descargas Reales</div>
-                <div className="text-lg font-black text-amber-300 mt-0.5">
+              <div className="bg-[#091E2A] p-2.5 rounded-lg border border-[#1F3C4D]">
+                <div className="text-[10px] font-semibold text-[#8C9BA5] uppercase">Descargas Reales</div>
+                <div className="text-base font-bold text-amber-300 mt-0.5">
                   {stats?.totalDownloads || 0}
                 </div>
               </div>
-              <div className="bg-[#092332] p-2.5 rounded-xl border border-[#1F3C4D]">
-                <div className="text-[10px] font-bold text-[#8C9BA5] uppercase">Empresas Activas</div>
-                <div className="text-lg font-black text-[#CFCDBC] mt-0.5">5 Filiales</div>
+              <div className="bg-[#091E2A] p-2.5 rounded-lg border border-[#1F3C4D]">
+                <div className="text-[10px] font-semibold text-[#8C9BA5] uppercase">Empresas Activas</div>
+                <div className="text-base font-bold text-[#CFCDBC] mt-0.5">6 Filiales</div>
               </div>
             </div>
           )}
